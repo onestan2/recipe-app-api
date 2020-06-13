@@ -8,6 +8,7 @@ from rest_framework import status
 
 CREATE_USER_URL = reverse('user:create')
 TOKEN_URL = reverse('user:token')
+# ME_URL = reverse('user:me')
 
 
 def create_user(**param):
@@ -68,7 +69,7 @@ class PublicUserApiTests(TestCase):
     def test_create_token_invalid_credentials(self):
         """Test that token is not created if invalid credentials are given"""
         create_user(email='test@xchainz.io', password="testpass")
-        payload = {"email": 'test@xchainz.io', 'password':'wrong'}
+        payload = {"email": 'test@xchainz.io', 'password': 'wrong'}
         res = self.client.post(TOKEN_URL, payload)
 
         self.assertNotIn('token', res.data)
